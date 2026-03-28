@@ -1,0 +1,344 @@
+/* Importa as fontes do Google Fonts:
+   - Syne (bold/700): usada em títulos e cabeçalhos
+   - Outfit (light/regular/medium): usada no corpo do texto */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=Outfit:wght@300;400;500&display=swap');
+
+/* ── Variáveis de cor (CSS Custom Properties) ─────────────────
+   Centraliza o tema visual — alterar aqui reflete em todo o site */
+:root {
+  --bg:          #050d1a;              /* Cor de fundo da página (azul muito escuro) */
+  --card:        #0c1a2e;              /* Fundo dos cards/formulários */
+  --card-borda:  #112240;              /* Borda dos cards */
+  --azul:        #2563eb;              /* Azul principal (botões, destaques) */
+  --azul-neon:   #38bdf8;              /* Azul claro neon (textos destacados) */
+  --azul-glow:   rgba(37, 99, 235, 0.35); /* Sombra/brilho azul para inputs e botões */
+  --texto:       #e2eaf8;              /* Cor principal do texto */
+  --texto-muted: #6b87b0;             /* Texto secundário (rótulos, links discretos) */
+  --borda:       #1e3a5f;              /* Cor das bordas de inputs */
+  --linha:       rgba(56, 189, 248, 0.08); /* Linha separadora sutil nas tabelas */
+}
+
+/* Reset básico: remove margens, paddings e define box-sizing para todos os elementos */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Estilo geral do corpo da página ─────────────────────────── */
+body {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  background-color: var(--bg);
+  /* Dois gradientes radiais sobrepostos para criar efeito de luz ambiente */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37, 99, 235, 0.22), transparent),
+    radial-gradient(ellipse 40% 30% at 90% 90%, rgba(56, 189, 248, 0.08), transparent);
+  min-height: 100vh; /* Ocupa pelo menos a altura total da janela */
+  color: var(--texto);
+  padding: 50px 20px;
+}
+
+/* ── Card (formulários e contêineres de conteúdo) ───────────── */
+form, .conteudo {
+  background: var(--card);
+  max-width: 860px;        /* Limita a largura máxima */
+  margin: 0 auto 30px auto; /* Centraliza horizontalmente com espaço embaixo */
+  border-radius: 20px;
+  border: 1px solid var(--card-borda);
+  overflow: hidden;
+  /* Sombra dupla: anel sutil + sombra profunda */
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.06),
+    0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Tabelas ─────────────────────────────────────────────────── */
+table {
+  width: 100% !important;
+  border-collapse: collapse; /* Remove espaços entre bordas das células */
+  border: none !important;
+}
+
+/* Estilo da primeira linha de cada tabela (título/cabeçalho do formulário) */
+table tr:first-child td {
+  background: linear-gradient(90deg, #0f1f3d 0%, #0c1a2e 100%);
+  border-bottom: 1px solid var(--azul);
+  color: var(--azul-neon);
+  font-family: 'Syne', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 26px 30px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+/* Estilo padrão das células */
+table td {
+  padding: 15px 24px;
+  border: none;
+  border-bottom: 1px solid var(--linha); /* Linha separadora sutil entre linhas */
+  font-size: 0.94rem;
+  color: var(--texto);
+  vertical-align: middle;
+  background: transparent;
+}
+
+/* Efeito hover nas linhas da tabela */
+table tr:hover td {
+  background: rgba(37, 99, 235, 0.06);
+  transition: background 0.2s;
+}
+
+/* Primeira célula de cada linha age como rótulo (label) */
+table td:first-child {
+  color: var(--texto-muted);
+  font-weight: 500;
+  font-size: 0.88rem;
+  letter-spacing: 0.4px;
+  white-space: nowrap; /* Impede quebra de linha nos rótulos */
+  width: 210px;
+}
+
+/* ── Inputs (texto, número e data) ──────────────────────────── */
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 11px 16px;
+  background: #07111f;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.93rem;
+  color: var(--texto);
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  -webkit-appearance: none; /* Remove estilo padrão do navegador em iOS/Safari */
+}
+
+/* Estado de foco: destaca o input com borda azul e brilho */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus {
+  border-color: var(--azul);
+  box-shadow: 0 0 0 3px var(--azul-glow);
+}
+
+/* Ícone do calendário no input de data: aplica filtro de cor para combinar com o tema */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6) sepia(1) hue-rotate(180deg);
+  cursor: pointer;
+}
+
+/* ── Botões (inputs do tipo submit) ─────────────────────────── */
+input[type="submit"] {
+  background: var(--azul);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 30px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  box-shadow: 0 0 20px var(--azul-glow); /* Brilho suave ao redor do botão */
+}
+
+/* Hover: escurece o botão e aumenta o brilho, com leve elevação */
+input[type="submit"]:hover {
+  background: #1d4ed8;
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.55);
+  transform: translateY(-1px);
+}
+
+/* Click: retorna o botão à posição original */
+input[type="submit"]:active {
+  transform: translateY(0);
+}
+
+/* ── Mensagens de feedback (sucesso, erro) ───────────────────── */
+p, .mensagem {
+  max-width: 860px;
+  margin: 0 auto 20px auto;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.3);
+  border-left: 3px solid var(--azul-neon); /* Destaque na borda esquerda */
+  border-radius: 10px;
+  padding: 14px 22px;
+  color: var(--azul-neon);
+  font-size: 0.93rem;
+  font-weight: 400;
+}
+
+/* ── Link "Home" presente em todas as páginas ───────────────── */
+a {
+  display: inline-block;
+  margin: 22px 0 0 0;
+  color: var(--texto-muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--azul-neon);
+}
+
+/* ── Cabeçalho da tabela no relatório (tag <th>) ────────────── */
+th {
+  background: #07111f !important;
+  color: var(--texto-muted) !important;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 14px 20px !important;
+  border-bottom: 1px solid var(--borda) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* ── Menu da página index.html ──────────────────────────────── */
+
+/* Título principal "SISTEMA DE FUNCIONÁRIOS" */
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+/* Lista de opções do menu (sem marcadores padrão) */
+ul {
+  list-style: none;
+  max-width: 460px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* Itens empilhados verticalmente */
+  gap: 12px;              /* Espaço entre cada item */
+}
+
+/* Card de cada item do menu */
+ul li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Texto à esquerda, seta à direita */
+  background: var(--card);
+  border: 1px solid var(--card-borda);
+  border-radius: 14px;
+  padding: 20px 28px;
+  color: var(--texto);
+  font-size: 0.97rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+}
+
+/* Seta "→" inserida via CSS após o texto de cada item do menu */
+ul li a::after {
+  content: '→';
+  color: var(--texto-muted);
+  font-size: 1rem;
+  transition: transform 0.2s, color 0.2s;
+}
+
+/* Hover no item do menu: destaca com borda azul e desloca levemente para a direita */
+ul li a:hover {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: var(--azul);
+  color: var(--azul-neon);
+  transform: translateX(4px);
+  text-decoration: none;
+}
+
+/* A seta também se move para a direita no hover */
+ul li a:hover::after {
+  transform: translateX(4px);
+  color: var(--azul-neon);
+}
+
+
+/* ── Melhorias visuais na tabela do Relatório ────────────────── */
+
+/* Zebra sutil: linhas pares têm fundo ligeiramente diferente para facilitar a leitura */
+table tbody tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Hover mais visível nas linhas da tabela do relatório */
+table tr:hover td {
+  background: rgba(37, 99, 235, 0.09) !important;
+  transition: background 0.15s;
+}
+
+/* Coluna de matrícula: centralizada, menor e em destaque discreto */
+table td:first-child {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--texto-muted);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Colunas monetárias (Salário, Bônus e Total) alinhadas à direita
+   com fonte tabelar para alinhar os números verticalmente */
+table td:nth-child(5),
+table td:nth-child(6),
+table td:nth-child(7) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3px;
+}
+
+/* Coluna de Bônus: exibida em azul neon quando há valor */
+table td:nth-child(6) {
+  color: var(--azul-neon);
+  font-weight: 500;
+}
+
+/* Coluna Total: texto branco e negrito para maior destaque */
+table td:nth-child(7) {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Garante opacidade total quando a célula de bônus tem conteúdo */
+table td:nth-child(6):not(:empty) {
+  opacity: 1;
+}
+
+/* Linha separadora mais elegante entre as linhas da tabela */
+table td {
+  border-bottom: 1px solid rgba(56, 189, 248, 0.06) !important;
+}
+
+/* Alinha os cabeçalhos (th) das colunas monetárias à direita, igual às células */
+th:nth-child(5),
+th:nth-child(6),
+th:nth-child(7) {
+  text-align: right !important;
+}
+
+/* Alinha o cabeçalho da coluna de matrícula ao centro */
+th:first-child {
+  text-align: center !important;
+}
+
+/* Aumenta o padding interno das células de dados para mais respiro visual */
+table td {
+  padding: 18px 24px !important;
+}

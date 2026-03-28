@@ -1,0 +1,32 @@
+-- ============================================================
+-- tabela.txt — Script SQL para criação e população do banco
+-- Execute este script no MySQL para preparar o ambiente
+-- ============================================================
+
+-- Cria o banco de dados (se ainda não existir)
+CREATE DATABASE ariane_pedro;
+
+-- Seleciona o banco criado para uso nas próximas instruções
+USE ariane_pedro;
+
+-- Cria a tabela "funcionario" com os seguintes campos:
+--   matricula  → chave primária gerada automaticamente (AUTO_INCREMENT)
+--   nome       → nome completo do funcionário (até 100 caracteres)
+--   cpf        → CPF no formato string (até 14 caracteres, ex: "000.000.000-00")
+--   data_ncto  → data de nascimento no formato DATE (AAAA-MM-DD)
+--   salario    → salário com até 10 dígitos no total e 2 casas decimais
+CREATE TABLE funcionario (
+    matricula  INT AUTO_INCREMENT PRIMARY KEY,
+    nome       VARCHAR(100),
+    cpf        VARCHAR(14),
+    data_ncto  DATE,
+    salario    DECIMAL(10,2)
+);
+
+-- Insere dados iniciais para teste do sistema
+-- As matrículas serão geradas automaticamente pelo banco (1, 2, 3, 4...)
+INSERT INTO funcionario (nome, cpf, data_ncto, salario) VALUES
+('Arthur Santos',   '222.222.222-22', '1998-03-03',  2000.00),
+('Beatriz Silva',  '111.111.111-11', '2005-05-30',  8000.00),
+('Carlos Oliveira', '333.333.333-33', '1997-03-15',  1700.00),
+('João Souza', '444.444.444-44', '2003-10-05', 10000.00);
